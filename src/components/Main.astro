@@ -1,6 +1,52 @@
 <section class="hero">
 	<div>
-	  <h1>Your Name</h1>
-	  <p>Developer / Designer / Whatever</p>
+	  <h1 class="raj">Raj</h1>
+	  <h1 class="jeyaram">Jeyaram</h1>
+	  <p>Vigilance. Courage. Wings.</p>
 	</div>
   </section>
+
+<style>
+	.hero
+	{
+		background: var(--white);
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		height: 100vh;
+	}
+
+	.hero h1
+	{
+		font-size: 20rem;
+		margin-bottom: 0;
+
+		background: linear-gradient(160deg, var(--midnight) 10%, var(--sun) 50%, var(--midnight) 90%);
+
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.raj{
+		margin-top: 0;
+	}
+
+	.jeyaram{
+		margin-top: -100px;
+	}
+
+	.hero p
+	{
+		background: linear-gradient(160deg, var(--midnight) 10%, var(--sunset) 20%, var(--midnight) 100%);
+
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+
+		font-size: 1.5rem;
+		color: var(--sunset);
+	}
+</style>
+

@@ -1,3 +1,96 @@
-	<a href="https://github.com/yourname">GitHub</a>
-	<a href="https://twitter.com/yourname">Twitter</a>
-	<a href="https://your-other-domain.com">Other Site</a>
+<nav class="top-bar">
+	<a href="https://astro.ravijey.com" class="home"> <span class="r">R</span><span class="full">aj Jeyaram</span> </a>
+	<a href="https://www.linkedin.com/in/rajvignesh-jeyaram-37a429241" >LinkedIn</a>
+	<a href="https://instagram.com">Insta</a>
+</nav>
+
+<style>
+	.top-bar
+	{
+		display: flex;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+
+		box-sizing: border-box;
+
+		opacity: 1;
+		backdrop-filter: blur(50px);
+		-webkit-backdrop-filter: blur(50px);
+		border-bottom: 0px solid rgba(0, 0, 0, 0.41);
+
+		justify-content: space-between;
+		align-items: center;
+
+		padding: 1rem 2rem;
+
+	}
+
+	.top-bar.active
+	{
+		border-bottom: 1px solid rgba(0, 0, 0, 0.41);
+	}
+
+	.top-bar a
+	{
+		color: var(--black);
+		text-decoration: none;
+	}
+	.top-bar a.home
+	{
+		font-size: 2.5rem;
+		font-weight: 200;
+		transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.full {
+		opacity: 0;
+		transform: translateX(-10px);
+		letter-spacing: -0.2em;
+		filter: blur(6px);
+		transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.top-bar a.home.active
+	{
+		font-size: 1.5rem;
+		font-weight: bold;
+	}
+
+	.top-bar a.home.active .full
+	{
+		opacity: 1;
+  		transform: translateX(0);
+  		letter-spacing: normal;
+  		filter: blur(0);
+	}
+
+
+</style>
+
+  
+<script>
+const home = document.querySelector('.home');
+const topBar = document.querySelector('.top-bar');
+
+window.addEventListener('scroll', () => {
+	const scrollTop = window.scrollY;
+
+	const documentHeight =
+	document.documentElement.scrollHeight - window.innerHeight;
+
+	const scrollPercent = scrollTop / documentHeight;
+
+	if (scrollPercent > 0.1) 
+	{
+		home?.classList.add('active');
+		topBar?.classList.add('active');
+	} 
+	else 
+	{
+  		home?.classList.remove('active');
+		topBar?.classList.remove('active');
+	}
+});
+</script>

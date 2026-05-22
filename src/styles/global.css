@@ -1,18 +1,30 @@
 :root
 {
 	--white: #e4e4e4;
+	--gray: #626262;
 	--black: #111111;
 	--beige: #e7e4e0;
 	--neon: #fafd05;
 	--lightgreen: #b8f160;
 
+	--gold: #ffb327;
+	--darkgold: #ff00c8;
 
+
+
+	/* Ocean Sunset */
+	--midnight: #001427;
+	--sea: #708d81;
+	--sand: #f4d58d;
+	--sunset: #bf0603;
+	--sun: #8d0801;
 }
 
 
 html
 {
 	scroll-behavior: smooth;
+	background-color: var(--white);
 }
 
 body
@@ -28,14 +40,6 @@ section
 	min-height: 100vh;
 	padding: 4rem;
 	box-sizing: border-box;
-}
-
-.hero
-{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
 }
 
 .footer
