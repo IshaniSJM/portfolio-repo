@@ -1,7 +1,7 @@
 <nav class="top-bar">
 	<a href="https://astro.ravijey.com" class="home"> <span class="r">R</span><span class="full">aj Jeyaram</span> </a>
-	<a href="https://www.linkedin.com/in/rajvignesh-jeyaram-37a429241" >LinkedIn</a>
-	<a href="https://instagram.com">Insta</a>
+	<!-- <a href="https://www.linkedin.com/in/rajvignesh-jeyaram-37a429241" >LinkedIn</a> -->
+	<!-- <a href="https://instagram.com">Insta</a> -->
 </nav>
 
 <style>
@@ -16,12 +16,13 @@
 		box-sizing: border-box;
 
 		opacity: 1;
-		backdrop-filter: blur(50px);
-		-webkit-backdrop-filter: blur(50px);
-		border-bottom: 0px solid rgba(0, 0, 0, 0.41);
+		backdrop-filter: blur(0px);
+		-webkit-backdrop-filter: blur(0px);
+		border-bottom: 1px solid rgba(0, 0, 0, 0);
+		transition: all 0.5s cubic-bezier(.98,0,.06,.96);
 
 		justify-content: space-between;
-		align-items: center;
+		align-items: left;
 
 		padding: 1rem 2rem;
 
@@ -29,6 +30,8 @@
 
 	.top-bar.active
 	{
+		backdrop-filter: blur(50px);
+		-webkit-backdrop-filter: blur(50px);
 		border-bottom: 1px solid rgba(0, 0, 0, 0.41);
 	}
 

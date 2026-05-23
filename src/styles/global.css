@@ -18,6 +18,9 @@
 	--sand: #f4d58d;
 	--sunset: #bf0603;
 	--sun: #8d0801;
+
+	--bg: var(--white);
+	--txt: var(--midnight);
 }
 
 
