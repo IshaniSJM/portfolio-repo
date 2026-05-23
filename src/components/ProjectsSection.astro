@@ -11,12 +11,14 @@ const projects = ["Proj_1", "Proj_2", "Proj_3", "Proj_4", "Proj_5", "Proj_6"];
 		{projects.map(project =>
 		(
 			<div class="project">
-				<a href={`/projects/${project}`}> {project} </a>
+				<a href={`/projects/${project}`}>
+					{project.split("").map((char, i) => <span style={{ "--i": `${i}` }}>{char}</span>)}
+				</a>
 				<div class="project-description">
 					<img src={`src/assets/Reference images/${project}.jpeg`} />
 					<div>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor.
-						<br>
+						<br/>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor.
 					</div>
 				</div>
@@ -29,6 +31,8 @@ const projects = ["Proj_1", "Proj_2", "Proj_3", "Proj_4", "Proj_5", "Proj_6"];
 	.projects
 	{
 		background: var(--bg);
+		padding: 0px;
+		padding-top: 5em;
 
 		height: max-content;
 		width: 100vw;
@@ -36,36 +40,68 @@ const projects = ["Proj_1", "Proj_2", "Proj_3", "Proj_4", "Proj_5", "Proj_6"];
 
 	.projects .projects-list
 	{
-		display: grid;
-		grid-template-columns: minmax(0px, min-content) minmax(min-content, 1fr);
+		display: flex;
+		flex-direction: column;
 	}
 
 	.projects .projects-list .project
 	{
-		height: max-content;
+		position: relative;
 
-		display: contents;
-		
-		text-align: center;
+		height: max-content;
 	}
 
 	.projects .projects-list .project a
 	{
+		display: inline-block;
+		font-family: var(--font-bebas);
+		font-size: 5em;
+
+		position: relative;
+		z-index: 1;
+
+		width: 50%;
+
 		color: var(--txt);
 
+		overflow: hidden;
 		text-decoration: none;
-		text-align: left;
+		text-align: right;
+	}
+
+	.projects .projects-list .project a span
+	{
+		display: inline-block;
+
+		transition: transform 0.4s cubic-bezier(.98,0,.06,.96);
+		transition-delay: calc(var(--i) * 0.05s); 
+	}
+
+	.projects .projects-list .project a:hover span
+	{
+		transform: translateY(-100%);
 	}
 
 	.projects .projects-list .project .project-description
 	{
+		position: absolute;
+
+		width: 50vw;
+
+		left: 50%;
+		top: 50%;
+		transform: translateY(-50%) translateX(50px);
+		
 		display: flex;
 		flex-direction: row;
 
 		opacity: 0;
-  		transform: translateX(50px);
+		transition:
+			opacity 0.4s cubic-bezier(.98,0,.06,.96),
+			transform 0.4s cubic-bezier(.98,0,.06,.96);
 
-  		transition: opacity 0.4s cubic-bezier(.98,0,.06,.96), transform 0.4s cubic-bezier(.98,0,.06,.96);
+		pointer-events: none;
+		word-wrap: break-word;
 	}
 
 	.projects .projects-list .project .project-description img
@@ -77,6 +113,7 @@ const projects = ["Proj_1", "Proj_2", "Proj_3", "Proj_4", "Proj_5", "Proj_6"];
 	.projects .projects-list .project:hover .project-description
 	{
 		opacity: 1;
-  		transform: translateX(0);
+  		transform: translateY(-50%) translateX(0);
+		pointer-events: auto;
 	}
 </style>

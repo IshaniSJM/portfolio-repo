@@ -7,8 +7,8 @@
 	--neon: #fafd05;
 	--lightgreen: #b8f160;
 
-	--gold: #ffb327;
-	--darkgold: #ff00c8;
+	--darkgray: #232323;
+	--gold: #ccb400;
 
 
 
@@ -19,23 +19,27 @@
 	--sunset: #bf0603;
 	--sun: #8d0801;
 
-	--bg: var(--white);
-	--txt: var(--midnight);
+	--bg: var(--black);
+	--bg-op: var(--darkgray);
+	--txt: var(--white);
+	--txt-special: var(--gold);
+	--txt-middle: var(--white);
+	--txt-end: var(--midnight);
 }
 
 
 html
 {
 	scroll-behavior: smooth;
-	background-color: var(--white);
+	background-color: var(--bg);
 }
 
 body
 {
 	margin: 0;
 	font-family: sans-serif;
-	background: var(--black);
-	color: white;
+	background: var(--bg);
+	color: var(--txt);
 }
 
 section
@@ -43,14 +47,4 @@ section
 	min-height: 100vh;
 	padding: 4rem;
 	box-sizing: border-box;
-}
-
-.footer
-{
-	min-height: 50vh;
-	display: flex;
-	gap: 2rem;
-	align-items: center;
-	justify-content: center;
-	background: var(--neon);
 }
