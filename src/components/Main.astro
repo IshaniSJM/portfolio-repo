@@ -1,5 +1,6 @@
 <section class="hero">
 	<div>
+	<p>Page loaded in: <span id="load-time">0</span> ms</p>
 	  <h1 class="raj">Raj</h1>
 	  <h1 class="jeyaram">Jeyaram</h1>
 	  <p>Vigilance. Courage. Wings.</p>
@@ -32,7 +33,7 @@
 	}
 
 	.raj{
-		margin-top: 0.1em;
+		margin-top: 0.03em;
 	}
 
 	.jeyaram{
@@ -42,13 +43,28 @@
 	.hero p
 	{
 		position: fixed;
-		background: linear-gradient(160deg, var(--midnight) 10%, var(--sunset) 20%, var(--midnight) 100%);
+		background: linear-gradient(160deg, var(--txt) 10%, var(--txt-middle) 20%, var(--txt-middle) 100%);
 
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 
 		font-size: 1.5rem;
-		color: var(--sunset);
+		/*color: var(--txt);*/
 	}
 </style>
+
+<script>
+	window.addEventListener('load', () => {
+		// Get the first navigation entry
+		const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+	
+		// Calculate total load time
+		const loadTime = navigation
+			? navigation.loadEventEnd.toFixed(2)
+			: '0';
+	
+		// Display result
+		document.getElementById('load-time')!.textContent = loadTime;
+	});
+	</script>
 

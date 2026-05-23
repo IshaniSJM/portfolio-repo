@@ -1,5 +1,5 @@
 ---
-const projects = ["Proj_1", "Proj_2", "Proj_3", "Proj_4", "Proj_5", "Proj_6"];
+const projects = ["drone_simulation", "4_legged_inversekinematics", "robust_character_controller", "personal_k3s_cluster", "portfolio_site", "microntrollers_ciruitry"];
 ---
 
 
@@ -12,7 +12,7 @@ const projects = ["Proj_1", "Proj_2", "Proj_3", "Proj_4", "Proj_5", "Proj_6"];
 		(
 			<div class="project">
 				<a href={`/projects/${project}`}>
-					{project.split("").map((char, i) => <span style={{ "--i": `${i}` }}>{char}</span>)}
+					<div class="project-name"> {project.split("").map((char, i) => <span data-letter={char} style={`--i: ${i}`}>{char}</span>)} </div>
 				</a>
 				<div class="project-description">
 					<img src={`src/assets/Reference images/${project}.jpeg`} />
@@ -69,17 +69,39 @@ const projects = ["Proj_1", "Proj_2", "Proj_3", "Proj_4", "Proj_5", "Proj_6"];
 		text-align: right;
 	}
 
-	.projects .projects-list .project a span
+	.projects .projects-list .project a .project-name span
 	{
 		display: inline-block;
 
-		transition: transform 0.4s cubic-bezier(.98,0,.06,.96);
-		transition-delay: calc(var(--i) * 0.05s); 
+		transform: translateY(0%);
+
+		transition: transform 0.4s cubic-bezier(.77,.12,.16,.95);
+		transition-delay: calc(var(--i) * 0.01s); 
 	}
 
-	.projects .projects-list .project a:hover span
+	.projects .projects-list .project a:hover .project-name span
 	{
 		transform: translateY(-100%);
+	}
+
+	.projects .projects-list .project a .project-name span:after
+	{
+
+		content: attr(data-letter);
+		position: absolute;
+
+		left: 0;
+  		top: 100%;
+
+		transform: translateY(100%);
+
+		transition: transform 0.4s cubic-bezier(.77,.12,.16,.95);
+		transition-delay: calc(var(--i) * 0.01s); 
+	}
+
+	.projects .projects-list .project a:hover .project-name span:after
+	{
+		transform: translateY(0%);
 	}
 
 	.projects .projects-list .project .project-description
