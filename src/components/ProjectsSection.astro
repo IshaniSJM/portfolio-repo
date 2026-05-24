@@ -1,5 +1,5 @@
 ---
-const projects = ["drone_simulation", "4_legged_inversekinematics", "robust_character_controller", "personal_k3s_cluster", "portfolio_site", "microntrollers_ciruitry"];
+const projects = ["drone_simulation", "4_legged_inversekinematics", "robust_character_controller", "personal_k3s_cluster", "portfolio_site", "microntrollers_RTOS"];
 ---
 
 
@@ -11,9 +11,11 @@ const projects = ["drone_simulation", "4_legged_inversekinematics", "robust_char
 		{projects.map(project =>
 		(
 			<div class="project">
-				<a href={`/projects/${project}`}>
-					<div class="project-name"> {project.split("").map((char, i) => <span data-letter={char} style={`--i: ${i}`}>{char}</span>)} </div>
-				</a>
+				<div class="project-title"> 
+					<a href={`/projects/${project}`}>
+						{project.split("").map((char, i) => <span data-letter={char} style={`--i: ${i}`}>{char}</span>)}
+					</a>
+				</div>
 				<div class="project-description">
 					<img src={`src/assets/Reference images/${project}.jpeg`} />
 					<div>
@@ -46,12 +48,15 @@ const projects = ["drone_simulation", "4_legged_inversekinematics", "robust_char
 
 	.projects .projects-list .project
 	{
-		position: relative;
-
 		height: max-content;
 	}
 
-	.projects .projects-list .project a
+	.projects .projects-list .project .project-title
+	{
+		position: relative;
+	}
+
+	.projects .projects-list .project .project-title a
 	{
 		display: inline-block;
 		font-family: var(--font-bebas);
@@ -69,7 +74,7 @@ const projects = ["drone_simulation", "4_legged_inversekinematics", "robust_char
 		text-align: right;
 	}
 
-	.projects .projects-list .project a .project-name span
+	.projects .projects-list .project .project-title a span
 	{
 		display: inline-block;
 
@@ -79,12 +84,12 @@ const projects = ["drone_simulation", "4_legged_inversekinematics", "robust_char
 		transition-delay: calc(var(--i) * 0.01s); 
 	}
 
-	.projects .projects-list .project a:hover .project-name span
+	.projects .projects-list .project .project-title a:hover span
 	{
 		transform: translateY(-100%);
 	}
 
-	.projects .projects-list .project a .project-name span:after
+	.projects .projects-list .project .project-title a span:after
 	{
 
 		content: attr(data-letter);
@@ -99,14 +104,14 @@ const projects = ["drone_simulation", "4_legged_inversekinematics", "robust_char
 		transition-delay: calc(var(--i) * 0.01s); 
 	}
 
-	.projects .projects-list .project a:hover .project-name span:after
+	.projects .projects-list .project .project-title a:hover span:after
 	{
 		transform: translateY(0%);
 	}
 
 	.projects .projects-list .project .project-description
 	{
-		position: absolute;
+		position: relative;
 
 		width: 50vw;
 

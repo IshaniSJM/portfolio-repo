@@ -7,7 +7,7 @@
 <style>
 	.top-bar
 	{	
-		
+		z-index: 2;
 		display: flex;
 		position: fixed;
 		top: 0;
@@ -33,7 +33,7 @@
 	{
 		backdrop-filter: blur(50px);
 		-webkit-backdrop-filter: blur(50px);
-		border-bottom: 1px solid rgba(0, 0, 0, 0.41);
+		border-bottom: 1px solid rgb(255, 255, 255);
 	}
 
 	.top-bar a
@@ -91,7 +91,7 @@ window.addEventListener('scroll', () => {
 
 	const scrollPercent = scrollTop / documentHeight;
 
-	if (scrollPercent > 0.1) 
+	if (scrollPercent > 0.4) 
 	{
 		home?.classList.add('active');
 		topBar?.classList.add('active');
