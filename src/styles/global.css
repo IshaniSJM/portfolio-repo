@@ -1,14 +1,15 @@
 :root
 {
 	--white: #e4e4e4;
-	--gray: #626262;
+	--white-dark: #141414;
+	--gray: #514634;
 	--black: #111111;
 	--beige: #e7e4e0;
 	--neon: #fafd05;
 	--lightgreen: #b8f160;
 
 	--darkgray: #232323;
-	--gold: #ccb400;
+	--gold: #5c5248;
 
 
 
@@ -19,12 +20,19 @@
 	--sunset: #bf0603;
 	--sun: #8d0801;
 
-	--bg: var(--black);
+	--bg: var(--beige);
+	--bg-light: var(--beige);
 	--bg-op: var(--darkgray);
-	--txt: var(--white);
-	--txt-special: var(--gold);
-	--txt-middle: var(--white);
+
+	--txt-special: var(--black);
+
+	--txt: var(--black);
+	--txt-middle: var(--black);
 	--txt-end: var(--midnight);
+
+	--radial-inner: var(--beige);
+	--radial-middle: var(--beige);
+	--radial-outer: var(--gold);
 }
 
 

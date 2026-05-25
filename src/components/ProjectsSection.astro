@@ -1,82 +1,76 @@
 ---
-const projects = ["drone_simulation", "4_legged_inversekinematics", "robust_character_controller", "personal_k3s_cluster", "portfolio_site", "microntrollers_RTOS"];
+const projects = ["Proj_1", "drone_simulation", "4_legged_inversekinematics", "robust_character_controller", "personal_k3s_cluster", "portfolio_site", "microntrollers_RTOS"];
+
+const imgs = import.meta.glob("../assets/Reference images/*.jpeg", { eager: true }) as Record<string, { default: string }>;
+
+const imgsUrls = Object.fromEntries
+(
+	Object.entries(imgs).map(([path, mod]) => 
+	[
+		path.split("/").pop()?.replace(".jpeg", ""),
+		mod.default
+	])
+);
 ---
 
 
 <section class="projects">
-	<!-- <h2>Projects</h2> -->
-
-
 	<div class="projects-list">
 		{projects.map(project =>
 		(
-			<div class="project">
-				<div class="project-title"> 
-					<a href={`/projects/${project}`}>
-						{project.split("").map((char, i) => <span data-letter={char} style={`--i: ${i}`}>{char}</span>)}
-					</a>
-				</div>
-				<div class="project-description">
-					<img src={`src/assets/Reference images/${project}.jpeg`} />
-					<div>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor.
-						<br/>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor.
-					</div>
-				</div>
-			</div>
+			<a class="project-title" data-projectName={project} href={`/projects/${project}`}>
+				{project.split("").map((char, i) => <span data-letter={char} style={`--i: ${i}`}>{char}</span>)}
+			</a>
 		))}
+	</div>
+	<div class="project-description">
+		{/* <img src={imgsUrls[project]} loading="lazy"/> */}
+		<div class="project-description-caption">
+			Lorem ipsum dolor sit amet consectetur
+		</div>
 	</div>
 </section>
 
 <style>
 	.projects
 	{
-		background: var(--bg);
-		padding: 0px;
-		padding-top: 5em;
+		display: flex;
+		flex-direction: row;
+
+		background: radial-gradient(circle at 5% -105%, var(--radial-inner) 27%, var(--radial-middle) 22%, var(--radial-outer) 77.4%);
 
 		height: max-content;
-		width: 100vw;
+		width: 100%;
 	}
 
-	.projects .projects-list
+	.projects-list
 	{
 		display: flex;
 		flex-direction: column;
+		align-items: flex-end;
+
+		width: 50%;
 	}
 
-	.projects .projects-list .project
+	.project-title
 	{
-		height: max-content;
-	}
-
-	.projects .projects-list .project .project-title
-	{
-		position: relative;
-	}
-
-	.projects .projects-list .project .project-title a
-	{
-		display: inline-block;
-		font-family: var(--font-bebas);
-		font-size: 5em;
-
 		position: relative;
 		z-index: 1;
 
-		width: 50%;
+		display: inline-block;
+		font-family: var(--font-bebas);
+		font-size: 4em;
 
 		color: var(--txt);
 
 		overflow: hidden;
 		text-decoration: none;
-		text-align: right;
 	}
 
-	.projects .projects-list .project .project-title a span
+	.project-title span
 	{
 		display: inline-block;
+		position: relative;
 
 		transform: translateY(0%);
 
@@ -84,14 +78,13 @@ const projects = ["drone_simulation", "4_legged_inversekinematics", "robust_char
 		transition-delay: calc(var(--i) * 0.01s); 
 	}
 
-	.projects .projects-list .project .project-title a:hover span
+	.project-title:hover span
 	{
 		transform: translateY(-100%);
 	}
 
-	.projects .projects-list .project .project-title a span:after
+	.project-title span:after
 	{
-
 		content: attr(data-letter);
 		position: absolute;
 
@@ -104,43 +97,55 @@ const projects = ["drone_simulation", "4_legged_inversekinematics", "robust_char
 		transition-delay: calc(var(--i) * 0.01s); 
 	}
 
-	.projects .projects-list .project .project-title a:hover span:after
+	.project-title:hover span:after
 	{
 		transform: translateY(0%);
 	}
 
-	.projects .projects-list .project .project-description
+	.project-description
 	{
 		position: relative;
-
-		width: 50vw;
-
-		left: 50%;
-		top: 50%;
-		transform: translateY(-50%) translateX(50px);
-		
-		display: flex;
-		flex-direction: row;
-
-		opacity: 0;
-		transition:
-			opacity 0.4s cubic-bezier(.98,0,.06,.96),
-			transform 0.4s cubic-bezier(.98,0,.06,.96);
-
-		pointer-events: none;
-		word-wrap: break-word;
+		width: 50%;
 	}
 
-	.projects .projects-list .project .project-description img
+	.project-description-caption
 	{
-		width: 15vw;
+		position: absolute;
+/* 		
+		left: 50%;
+		top: 0;
+
+		width: 100%;
+
+		display: flex;
+
+		color: var(--txt);
+
+		opacity: 1;
+		filter: blur(0);
+
+		transition: 
+			opacity 0.4s cubic-bezier(.98,0,.06,.96),
+			filter 0.4s cubic-bezier(.98,0,.06,.96);
+
+		pointer-events: none;  */
+	}
+
+	.project-description img
+	{
+		width: 15%;
 		height: auto;
 	}
 
-	.projects .projects-list .project:hover .project-description
+	.project:has(.project-title:hover) .project-description-caption
 	{
+		/*
+		,
+	.project:has(.project-title:focus-visible) .project-description-caption
 		opacity: 1;
-  		transform: translateY(-50%) translateX(0);
-		pointer-events: auto;
+		filter: blur(0);
+		pointer-events: auto; */
+
+		content: "monek";
 	}
 </style>

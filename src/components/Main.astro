@@ -11,7 +11,7 @@
 	.hero
 	{
 		font-family: var(--font-anton);
-		background: var(--bg);
+		background: radial-gradient(circle at 5% 5%, var(--radial-inner) 10%, var(--radial-middle) 30%, var(--radial-outer) 100%);
 
 		display: flex;
 		flex-direction: column;
@@ -23,10 +23,10 @@
 
 	.hero h1
 	{
-		font-size: 25rem;
+		font-size: 20rem;
 		margin-bottom: 0;
 
-		background: linear-gradient(160deg, var(--txt) 10%, var(--txt-middle) 50%, var(--txt-end) 90%);
+		background: linear-gradient(160deg, var(--txt) 0%, var(--txt-middle) 30%, var(--txt-end) 80%);
 
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
@@ -42,7 +42,6 @@
 
 	.hero p
 	{
-		position: fixed;
 		background: linear-gradient(160deg, var(--txt) 10%, var(--txt-middle) 20%, var(--txt-middle) 100%);
 
 		-webkit-background-clip: text;
