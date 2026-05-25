@@ -1,5 +1,5 @@
 ---
-const projects = ["Proj_1", "drone_simulation", "4_legged_inversekinematics", "robust_character_controller", "personal_k3s_cluster", "portfolio_site", "microntrollers_RTOS"];
+const projects = {"Proj_1":"", "drone_simulation":"", "4_legged_inversekinematics":"", "robust_character_controller":"", "personal_k3s_cluster":"", "portfolio_site":"", "microntrollers_RTOS":""};
 
 const imgs = import.meta.glob("../assets/Reference images/*.jpeg", { eager: true }) as Record<string, { default: string }>;
 
@@ -16,7 +16,7 @@ const imgsUrls = Object.fromEntries
 
 <section class="projects">
 	<div class="projects-list">
-		{projects.map(project =>
+		{Object.entries(projects).forEach(([project, description]) =>
 		(
 			<a class="project-title" data-projectName={project} href={`/projects/${project}`}>
 				{project.split("").map((char, i) => <span data-letter={char} style={`--i: ${i}`}>{char}</span>)}
@@ -25,9 +25,7 @@ const imgsUrls = Object.fromEntries
 	</div>
 	<div class="project-description">
 		{/* <img src={imgsUrls[project]} loading="lazy"/> */}
-		<div class="project-description-caption">
-			Lorem ipsum dolor sit amet consectetur
-		</div>
+		<span class="project-description-caption"> Lorem ipsum dolor sit amet consectetur </span>
 	</div>
 </section>
 
@@ -37,7 +35,8 @@ const imgsUrls = Object.fromEntries
 		display: flex;
 		flex-direction: row;
 
-		background: radial-gradient(circle at 5% -105%, var(--radial-inner) 27%, var(--radial-middle) 22%, var(--radial-outer) 77.4%);
+		background-image: 	radial-gradient(circle at 5% -105%, var(--radial-inner) 27%, var(--radial-middle) 22%, var(--radial-outer) 77.4%); 
+							/*radial-gradient(circle at 100% 50%, white 27%, var(--radial-middle) 22%, transparent 100%, var(--radial-outer) 50%, transparent 100%);*/
 
 		height: max-content;
 		width: 100%;
@@ -108,10 +107,19 @@ const imgsUrls = Object.fromEntries
 		width: 50%;
 	}
 
-	.project-description-caption
+	{/*  
+	.project-description img
+	{
+		width: 15%;
+		height: auto;
+	}
+	*/}
+
+	.project-description-caption,
+	.project-description-caption:after
 	{
 		position: absolute;
-/* 		
+		/* 		
 		left: 50%;
 		top: 0;
 
@@ -128,24 +136,20 @@ const imgsUrls = Object.fromEntries
 			opacity 0.4s cubic-bezier(.98,0,.06,.96),
 			filter 0.4s cubic-bezier(.98,0,.06,.96);
 
-		pointer-events: none;  */
+		pointer-events: none;
+		*/
 	}
 
-	.project-description img
+	.projects:has(.project-title:hover) .project-description-caption:after,
+	.projects:has(.project-title:focus-visible) .project-description-caption:after
 	{
-		width: 15%;
-		height: auto;
-	}
-
-	.project:has(.project-title:hover) .project-description-caption
-	{
+		
+		content: none;
 		/*
-		,
-	.project:has(.project-title:focus-visible) .project-description-caption
 		opacity: 1;
 		filter: blur(0);
 		pointer-events: auto; */
 
-		content: "monek";
 	}
+
 </style>

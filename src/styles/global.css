@@ -2,11 +2,14 @@
 {
 	--white: #e4e4e4;
 	--white-dark: #141414;
-	--gray: #514634;
+	--gray: #D9CFC7;
 	--black: #111111;
 	--beige: #e7e4e0;
 	--neon: #fafd05;
 	--lightgreen: #b8f160;
+
+	--sea-shell: #758A93;
+	--sea-dark: #34656D;
 
 	--darkgray: #232323;
 	--gold: #5c5248;
@@ -32,7 +35,8 @@
 
 	--radial-inner: var(--beige);
 	--radial-middle: var(--beige);
-	--radial-outer: var(--gold);
+	--radial-outer: var(--gray);
+
 }
 
 
