@@ -107,15 +107,19 @@ const imgsUrls = Object.fromEntries(
 		{
 			activeProject = null;
 
-			hoverBox.classList.remove("visible");
+			hoverBox.classList.remove("show");
+
 			description.classList.remove("show");
 		};
 
+		let previousLeftOffset = 0;
 		const showProject = (project) =>
 		{
 			if(activeProject === project) return;
 
+			const previousProjectNum = parseInt(activeProject?.dataset.projectname ?? 0);
 			activeProject = project;
+			const activeProjectNum = parseInt(activeProject?.dataset.projectname ?? 0);
 
 			const nextSrc = project.dataset.image || "";
 			const nextCaption = project.dataset.caption || "";
@@ -124,8 +128,47 @@ const imgsUrls = Object.fromEntries(
 			const preload = new Image();
 			preload.src = nextSrc;
 
-			// show container
-			hoverBox.classList.add("visible");
+			const projectListRect = projectsList.getBoundingClientRect();
+			const projectRect = project.getBoundingClientRect();
+
+			const hoverBoxHeight = window.innerWidth * (498/1920);
+			const hoverBoxWidth = window.innerWidth * (719/1920);
+
+			const topOffset = (projectRect.top - projectListRect.top) + projectRect.height / 2 - hoverBoxHeight / 2;
+
+			const newLeftOffset = Math.floor(Math.random() * (27 - 0 + 1)) + 0;
+
+			console.log(previousLeftOffset, newLeftOffset);
+
+			if(previousProjectNum < activeProjectNum)
+			{
+				hoverBox.style.height = `${hoverBoxHeight + projectRect.height}px`;
+			}
+			else if(previousProjectNum > activeProjectNum)
+			{
+				hoverBox.style.height = `${hoverBoxHeight + projectRect.height}px`;
+				hoverBox.style.top = `${topOffset}px`;
+			}
+
+			if(previousLeftOffset < newLeftOffset)
+			{
+				hoverBox.style.width = `${hoverBoxWidth + ((newLeftOffset - previousLeftOffset) * (1920/2))}px`;
+			}
+			else if(previousLeftOffset > newLeftOffset)
+			{
+				hoverBox.style.width = `${hoverBoxWidth + ((previousLeftOffset - newLeftOffset) * (1920/2))}px`;
+				hoverBox.style.left = `${newLeftOffset}%`;	
+			}
+			previousLeftOffset = newLeftOffset;
+
+			setTimeout(() =>
+			{
+				hoverBox.style.height = `${hoverBoxHeight}px`;
+				hoverBox.style.top = `${topOffset}px`;
+
+				hoverBox.style.width = `${hoverBoxWidth}px`;
+				hoverBox.style.left = `${newLeftOffset}%`;
+			}, 500);
 
 			// fade old content out
 			description.classList.remove("show");
@@ -150,21 +193,16 @@ const imgsUrls = Object.fromEntries(
 					image.src = nextSrc;
 					caption.textContent = nextCaption;
 
-					const projectListRect = projectsList.getBoundingClientRect();
-					const projectRect = project.getBoundingClientRect();
-
-					const offset = projectRect.top - projectListRect.top + projectRect.height / 2 - hoverBox.offsetHeight / 2;
-
-					hoverBox.style.top = `${offset}px`;
-
 					requestAnimationFrame(() =>
 					{
+						hoverBox.classList.add("show");
 						description.classList.add("show");
 					});
 				}
 
-			}, 600);
+			}, 250);
 		};
+
 
 		document.querySelectorAll(".project").forEach(project =>
 		{
@@ -236,9 +274,6 @@ const imgsUrls = Object.fromEntries(
 			}
 		});
 	});
-
-
-	
 </script>
 
 <style is:global>
@@ -268,6 +303,8 @@ const imgsUrls = Object.fromEntries(
 
 	.project
 	{
+		height: fit-content;
+
 		position: relative;
 		z-index: 1;
 
@@ -340,18 +377,22 @@ const imgsUrls = Object.fromEntries(
 		left: 0;
 
 		width: 80%;
-		height: min-content;
+		height: `${window.innerWidth * (498/1920)}`px;
+
+		border: 1px solid var(--sunset);
+		border-radius: 30px;
 
 		opacity: 0;
 
-		border: 1px solid var(--sunset);
-
 		transition:
-			top 0.35s cubic-bezier(.77,.12,.16,.95),
-			opacity 0.25s ease;
+			opacity 0.25s cubic-bezier(.77,.12,.16,.95),
+			height 0.125s cubic-bezier(.77,.12,.16,.95),
+			width 0.125s cubic-bezier(.77,.12,.16,.95),
+			top 0.125s cubic-bezier(.77,.12,.16,.95),
+			left 0.125s cubic-bezier(.77,.12,.16,.95)
 	}
 
-	.hover-box.visible
+	.hover-box.show
 	{
 		opacity: 1;
 	}
@@ -367,8 +408,8 @@ const imgsUrls = Object.fromEntries(
 		filter: blur(20px);
 
 		transition:
-			opacity 0.6s cubic-bezier(.98,0,.06,.96),
-			filter 0.6s cubic-bezier(.98,0,.06,.96);
+			opacity 0.25s cubic-bezier(.98,0,.06,.96),
+			filter 0.25s cubic-bezier(.98,0,.06,.96);
 	}
 
 	.project-description.show
@@ -385,16 +426,15 @@ const imgsUrls = Object.fromEntries(
 		border-radius: 30px;
 
 		box-shadow: 10px 10px 50px rgba(149, 149, 149, 1);
-
-		transition: opacity 0.5s cubic-bezier(.98,0,.06,.96);
 	}
 
 	.project-description-caption
 	{
 		width: 100%;
 
+		text-align: center;
+
 		font-size: 1rem;
 		color: var(--txt);
 	}
-
 </style>
