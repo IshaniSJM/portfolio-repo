@@ -131,14 +131,12 @@ const imgsUrls = Object.fromEntries(
 			const projectListRect = projectsList.getBoundingClientRect();
 			const projectRect = project.getBoundingClientRect();
 
-			const hoverBoxHeight = window.innerWidth * (498/1920);
-			const hoverBoxWidth = window.innerWidth * (719/1920);
+			const hoverBoxHeight = window.innerWidth * (530/1920);
+			const hoverBoxWidth = window.innerWidth * (768/1920);
 
 			const topOffset = (projectRect.top - projectListRect.top) + projectRect.height / 2 - hoverBoxHeight / 2;
 
-			const newLeftOffset = Math.floor(Math.random() * (27 - 0 + 1)) + 0;
-
-			console.log(previousLeftOffset, newLeftOffset);
+			const newLeftOffset = (Math.floor(Math.random() * (((window.innerWidth/2) * 0.2) - 0 + 1)) + 0);
 
 			if(previousProjectNum < activeProjectNum)
 			{
@@ -152,12 +150,12 @@ const imgsUrls = Object.fromEntries(
 
 			if(previousLeftOffset < newLeftOffset)
 			{
-				hoverBox.style.width = `${hoverBoxWidth + ((newLeftOffset - previousLeftOffset) * (1920/2))}px`;
+				hoverBox.style.width = `${hoverBoxWidth + (newLeftOffset - previousLeftOffset)}px`;
 			}
 			else if(previousLeftOffset > newLeftOffset)
 			{
-				hoverBox.style.width = `${hoverBoxWidth + ((previousLeftOffset - newLeftOffset) * (1920/2))}px`;
-				hoverBox.style.left = `${newLeftOffset}%`;	
+				hoverBox.style.width = `${hoverBoxWidth + (previousLeftOffset - newLeftOffset)}px`;
+				hoverBox.style.left = `${newLeftOffset}px`;	
 			}
 			previousLeftOffset = newLeftOffset;
 
@@ -167,8 +165,8 @@ const imgsUrls = Object.fromEntries(
 				hoverBox.style.top = `${topOffset}px`;
 
 				hoverBox.style.width = `${hoverBoxWidth}px`;
-				hoverBox.style.left = `${newLeftOffset}%`;
-			}, 500);
+				hoverBox.style.left = `${newLeftOffset}px`;
+			}, 125);
 
 			// fade old content out
 			description.classList.remove("show");
@@ -177,29 +175,26 @@ const imgsUrls = Object.fromEntries(
 			clearTimeout(swapTimeout);
 
 			// wait for fade-out
-			swapTimeout = setTimeout(() =>
+			swapTimeout = setTimeout(() => 
 			{
-				// user already moved to another project
 				if(activeProject !== project) return;
 
-				preload.onload = () =>
-				{
-					// ensure still active
+				const applyContent = () => {
 					if(activeProject !== project) return;
-				};
-
-				if(preload.complete)
-				{
 					image.src = nextSrc;
 					caption.textContent = nextCaption;
 
-					requestAnimationFrame(() =>
-					{
+					requestAnimationFrame(() => {
 						hoverBox.classList.add("show");
 						description.classList.add("show");
 					});
-				}
+				};
 
+				if (preload.complete) {
+					applyContent();
+				} else {
+					preload.onload = applyContent;
+				}
 			}, 250);
 		};
 
@@ -376,8 +371,8 @@ const imgsUrls = Object.fromEntries(
 		top: 0;
 		left: 0;
 
-		width: 80%;
-		height: `${window.innerWidth * (498/1920)}`px;
+		width: 0px;
+		height: 0px;
 
 		border: 1px solid var(--sunset);
 		border-radius: 30px;
